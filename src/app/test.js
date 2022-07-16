@@ -23,7 +23,7 @@ const options = {
 };
 
 const data = {
-  "text": "Hello world!"
+  "text": undefined
 };
 
 const endpointURL = `https://api.twitter.com/2/tweets`;
@@ -69,8 +69,8 @@ function getTweetFrom(lyrics) {
   const index = getRandomIndex(lyrics.length, numberOfLines);
   let tweet = '';
   for (let i = index; i < index + numberOfLines; i++) {
-    if(i === index + numberOfLines - 1) tweet = tweet + lyrics[i]
-    else tweet = tweet + lyrics[i] + '/n';
+    if(i === index + numberOfLines - 1) tweet = tweet + lyrics[i] + '.'
+    else tweet = tweet + lyrics[i] + ',\n';
   }
   tweet = tweet.replace('\\', '');
   return tweet;
@@ -115,12 +115,12 @@ async function getRequest(
     let lyrics = await getRawLyrics();
     lyrics = filterLyrics(lyrics);
     const tweet = getTweetFrom(lyrics);
-    console.log('Tweet', tweet);
-
-    // const response = await getRequest(oAuthAccessToken);
-    // console.dir(response, {
-    //   depth: null
-    // });
+    data['text'] = tweet;
+    console.log(tweet);
+    const response = await getRequest(oAuthAccessToken);
+    console.dir(response, {
+        depth: null
+     });
   } catch (e) {
     console.log(e);
     process.exit(-1);
