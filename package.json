@@ -13,6 +13,7 @@
   "dependencies": {
     "crypto": "^1.0.1",
     "dotenv": "^16.0.1",
+    "genius-lyrics-api": "^3.2.0",
     "got": "^12.1.0",
     "oauth-1.0a": "^2.2.6",
     "querystring": "^0.2.1"
